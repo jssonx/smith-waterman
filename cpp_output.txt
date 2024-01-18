@@ -1,0 +1,2 @@
+Naive implementation score: 5061
+AVX2 implementation score: 5061
