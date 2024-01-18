@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-march=native
+CFLAGS=-mavx2 -fopenmp -std=c++11
 TARGET=main
 
 all: $(TARGET)

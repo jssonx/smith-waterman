@@ -1,2 +1,2 @@
-Naive implementation score: 5061
-AVX2 implementation score: 5061
+Naive SW score: 5061
+AVX2 SW score: 5061

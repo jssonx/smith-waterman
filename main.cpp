@@ -86,6 +86,7 @@ int smith_waterman_avx(const std::string &seq1, const std::string &seq2)
 
                 // Compute match/mismatch scores
                 int scores[8];
+
                 for (int k = 0; k < 8; ++k)
                 {
                     scores[k] = (seq1[i - 1] == seq2[j + k - 1]) ? MATCH_SCORE : MISMATCH_SCORE;
@@ -134,8 +135,8 @@ int smith_waterman_avx(const std::string &seq1, const std::string &seq2)
 
 int main()
 {
-    std::string seq1 = read_sequence_from_file("sequence1.txt");
-    std::string seq2 = read_sequence_from_file("sequence2.txt");
+    std::string seq1 = read_sequence_from_file("./data/GQ457487.txt");
+    std::string seq2 = read_sequence_from_file("./data/GQ117044.txt");
 
     if (seq1.empty() || seq2.empty())
     {
@@ -151,7 +152,7 @@ int main()
     int max_score_naive = smith_waterman(seq1, seq2);
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> run_time = end - start;
-    output_file << "Naive implementation score: " << max_score_naive << std::endl;
+    output_file << "Naive SW score: " << max_score_naive << std::endl;
     std::cout << "Execution time: " << run_time.count() << " milliseconds" << std::endl;
 
     // Naive + AVX2
@@ -159,7 +160,7 @@ int main()
     int max_score_avx = smith_waterman_avx(seq1, seq2);
     end = std::chrono::high_resolution_clock::now();
     run_time = end - start;
-    output_file << "AVX2 implementation score: " << max_score_avx << std::endl;
+    output_file << "AVX2 SW score: " << max_score_avx << std::endl;
     std::cout << "Execution time: " << run_time.count() << " milliseconds" << std::endl;
 
     return 0;
