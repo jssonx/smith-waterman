@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-mavx2 -fopenmp -std=c++11
+CFLAGS=-mavx2 -O3
 TARGET=main
 
 all: $(TARGET)

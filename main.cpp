@@ -132,7 +132,6 @@ int smith_waterman_avx(const std::string &seq1, const std::string &seq2)
     std::cout << "\nMaximum score: " << max_score << std::endl;
     return max_score;
 }
-
 int main()
 {
     std::string seq1 = read_sequence_from_file("./data/GQ457487.txt");
@@ -152,16 +151,22 @@ int main()
     int max_score_naive = smith_waterman(seq1, seq2);
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> run_time = end - start;
+    double time_in_seconds = run_time.count() / 1000.0;
+    double gcups_naive = (static_cast<double>(seq1.length()) * seq2.length()) / time_in_seconds / 1e9;
+
     output_file << "Naive SW score: " << max_score_naive << std::endl;
-    std::cout << "Execution time: " << run_time.count() << " milliseconds" << std::endl;
+    std::cout << "Naive Execution time: " << run_time.count() << " milliseconds, GCUPS: " << gcups_naive << std::endl;
 
     // Naive + AVX2
     start = std::chrono::high_resolution_clock::now();
     int max_score_avx = smith_waterman_avx(seq1, seq2);
     end = std::chrono::high_resolution_clock::now();
     run_time = end - start;
+    time_in_seconds = run_time.count() / 1000.0;
+    double gcups_avx = (static_cast<double>(seq1.length()) * seq2.length()) / time_in_seconds / 1e9;
+
     output_file << "AVX2 SW score: " << max_score_avx << std::endl;
-    std::cout << "Execution time: " << run_time.count() << " milliseconds" << std::endl;
+    std::cout << "AVX2 Execution time: " << run_time.count() << " milliseconds, GCUPS: " << gcups_avx << std::endl;
 
     return 0;
 }

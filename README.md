@@ -35,7 +35,7 @@ Compile the C++ code and execute the Smith-Waterman algorithm using the fetched 
 Execute tests to validate the implementation's correctness against known sequences:
 
 ```bash
-make test
+python test.py
 ```
 
 Compare the Smith-Waterman algorithm's output in both basic and AVX2-optimized versions against expected results using this method.
